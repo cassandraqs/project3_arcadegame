@@ -28,7 +28,7 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     
     this.x += this.speed*dt;
-    var overlap = !(((this.x + 101) <= player.x)||(this.x>= (player.x + 83)||((this.y+83) <= player.y)||(this.y >= player.y + 101)));
+    var overlap = !(((this.x + 81) <= player.x)||(this.x>= (player.x + 83)||((this.y+83) <= player.y)||(this.y >= player.y + 81)));
     
     if(overlap === true)  {
         //collision 
