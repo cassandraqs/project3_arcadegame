@@ -27,6 +27,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     
+    
     this.x += this.speed*dt;
     var overlap = !(((this.x + 81) <= player.x)||(this.x>= (player.x + 83)||((this.y+83) <= player.y)||(this.y >= player.y + 81)));
     
