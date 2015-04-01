@@ -24,7 +24,9 @@ var Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime,
-        inAnimation = true;
+        inAnimation = true,
+        playerId,
+        thePlayer;
 
     canvas.width = 505;
     canvas.height = 606;
@@ -163,14 +165,31 @@ var Engine = (function(global) {
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
+    global.setPlayerOne = function() {
+        playerId = "boy"; 
+    }
+    global.setPlayerTwo = function() {
+        playerId = "cat-girl"; 
+    }
+    global.setPlayer = function() {
+        if(playerId === "boy") {
+            return "images/char-boy.png";
+        } else {
+            return "images/char-cat-girl.png";
+        }
+    }
     global.start = function() {
         // noop
+        //thePlayer = setPlayer();
         document.getElementById("start").style.visibility = "hidden";
+        document.getElementById("boy").style.visibility = "hidden";
+        document.getElementById("cat-girl").style.visibility = "hidden";
         inAnimation = true;
         main();
     }
     global.reset = function() {
         inAnimation = false;
+        
         document.getElementById("start").style.visibility = "visible";
     }
 
@@ -183,7 +202,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/char-cat-girl.png'
     ]);
     Resources.bindReady(init);// bind the function init() to the event "Ready"
 
