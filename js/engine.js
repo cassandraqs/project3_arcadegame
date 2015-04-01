@@ -23,7 +23,8 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime;
+        lastTime,
+        inAnimation = true;
 
     canvas.width = 505;
     canvas.height = 606;
@@ -45,6 +46,7 @@ var Engine = (function(global) {
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
+
         update(dt);
         render();
 
@@ -56,7 +58,9 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+        if (inAnimation) {
+            win.requestAnimationFrame(main);
+        }
     };
 
     /* This function does some initial setup that should only occur once,
@@ -64,9 +68,9 @@ var Engine = (function(global) {
      * game loop.
      */
     function init() {//entry point
-        reset();
+        
         lastTime = Date.now();
-        main();
+        
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -159,8 +163,15 @@ var Engine = (function(global) {
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
-    function reset() {
+    global.start = function() {
         // noop
+        document.getElementById("start").style.visibility = "hidden";
+        inAnimation = true;
+        main();
+    }
+    global.reset = function() {
+        inAnimation = false;
+        document.getElementById("start").style.visibility = "visible";
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -182,3 +193,4 @@ var Engine = (function(global) {
      */
     global.ctx = ctx;// set the value of global.ctx to the ctx here.
 })(this);//this equals window here.
+

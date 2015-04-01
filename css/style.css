@@ -1,3 +1,8 @@
 body {
     text-align: center;
 }
+button {
+	position: absolute;
+	top:50%;
+	left:50%;
+}

@@ -31,8 +31,16 @@ Enemy.prototype.update = function(dt) {
     if(overlap === true)  {
         //collision 
         console.log("Hit!");
-        player.x = player.initial_x;
-        player.y = player.initial_y;
+        if(player.life > 1) {
+            player.life -= 1;
+            player.x = player.initial_x;
+            player.y = player.initial_y;
+        } else {
+            console.log("GAME OVER!");
+            reset();
+        }
+        
+        
         
     } 
     if(this.x >= ctx.canvas.width) {
@@ -58,7 +66,7 @@ var Player = function(x,y,speed) {
     this.speed = speed;
     this.initial_x = x;
     this.initial_y = y;
-    //this.life = 3;
+    this.life = 3;
 }
 
 Player.prototype.update = function() {
