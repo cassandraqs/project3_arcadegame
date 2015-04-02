@@ -37,6 +37,8 @@ Enemy.prototype.update = function(dt) {
             player.y = player.initial_y;
         } else {
             console.log("GAME OVER!");//when player is hit 3 times, game over and return to player selection page
+            player.x = player.initial_x;//return player to her initial location
+            player.y = player.initial_y;
             reset();
         }
         
