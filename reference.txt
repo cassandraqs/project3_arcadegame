@@ -1,0 +1,3 @@
+https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+
+http://www.w3schools.com/jsref/dom_obj_style.asp
