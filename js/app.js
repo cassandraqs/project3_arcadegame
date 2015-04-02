@@ -67,7 +67,7 @@ Player.prototype.update = function() {
         xdir = 0;
         ydir = 0;
         console.log("off canvas!");
-    } else if((this.y )<= 75) {//when player reaches water, player wins
+    } else if((this.y )<= 0) {//when player reaches water, player wins
         xdir = 0;
         ydir = 0;
         console.log("you win!");
@@ -101,11 +101,11 @@ Player.prototype.handleInput = function(keyEvent) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var player = new Player(200, ctx.canvas.height -200);
+var player = new Player(200, ctx.canvas.height -205);
 var allEnemies = [];
-allEnemies.push(new Enemy(0,61,10));
-allEnemies.push(new Enemy(0,151,25));
-allEnemies.push(new Enemy(0,231,15));
+allEnemies.push(new Enemy(0,61,20));
+allEnemies.push(new Enemy(0,151,45));
+allEnemies.push(new Enemy(0,231,35));
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
