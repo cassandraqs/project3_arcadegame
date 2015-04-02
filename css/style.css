@@ -4,7 +4,7 @@ body {
 #start {
 	position: absolute;
 	top:80%;
-	left:45%;
+	left:40%;
 }
 #boy {
 	position: absolute;
@@ -14,5 +14,20 @@ body {
 #cat-girl {
 	position: absolute;
 	top:30%;
+	left:30%;
+}
+#horn-girl {
+	position: absolute;
+	top:30%;
 	left:40%;
+}
+#pink-girl {
+	position: absolute;
+	top:30%;
+	left:50%;
+}
+#princess-girl {
+	position: absolute;
+	top:30%;
+	left:60%;
 }

@@ -22,14 +22,15 @@ var Engine = (function(global) {
     var doc = global.document,
         win = global.window,
         canvas = doc.createElement('canvas'),
+        
         ctx = canvas.getContext('2d'),
         lastTime,
-        inAnimation = true,
-        playerId,
-        thePlayer;
+        inAnimation = true;
+        
 
     canvas.width = 505;
     canvas.height = 606;
+    canvas.id = "myCanvas";
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -86,7 +87,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        
     }
 
     /* This is called by the update function  and loops through all of the
@@ -109,7 +110,7 @@ var Engine = (function(global) {
      * they are flipbooks creating the illusion of animation but in reality
      * they are just drawing the entire screen over and over.
      */
-    function render() {//draw bacground
+    function render() {//draw bacground and enemies and player
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
          */
@@ -161,36 +162,53 @@ var Engine = (function(global) {
         player.render();
     }
 
+    //handle all player selection and change player.sprite
+    global.setPlayerOne = function() {
+        document.getElementById("boy").style.border = "3px";
+        player.ChangeSprite("images/char-boy.png");
+    }
+    global.setPlayerTwo = function() {
+        document.getElementById("cat-girl").style.border = "3px";
+        player.ChangeSprite("images/char-cat-girl.png");
+    }
+    global.setPlayerThree = function() {
+        document.getElementById("horn-girl").style.border = "3px";
+        player.ChangeSprite("images/char-horn-girl.png");
+    }
+    global.setPlayerFour = function() {
+        document.getElementById("pink-girl").style.border = "3px";
+        player.ChangeSprite("images/char-pink-girl.png");
+    }
+    global.setPlayerFive = function() {
+        document.getElementById("princess-girl").style.border = "3px";
+        player.ChangeSprite("images/char-princess-girl.png");
+    }
+   
+    global.start = function() {
+        // noop
+        document.getElementById("myCanvas").style.visibility = "visible";
+        document.getElementById("start").style.visibility = "hidden";
+        document.getElementById("boy").style.visibility = "hidden";
+        document.getElementById("cat-girl").style.visibility = "hidden";
+        document.getElementById("horn-girl").style.visibility = "hidden";
+        document.getElementById("pink-girl").style.visibility = "hidden";
+        document.getElementById("princess-girl").style.visibility = "hidden";
+        inAnimation = true;
+        main();
+    }
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
-    global.setPlayerOne = function() {
-        playerId = "boy"; 
-    }
-    global.setPlayerTwo = function() {
-        playerId = "cat-girl"; 
-    }
-    global.setPlayer = function() {
-        if(playerId === "boy") {
-            return "images/char-boy.png";
-        } else {
-            return "images/char-cat-girl.png";
-        }
-    }
-    global.start = function() {
-        // noop
-        //thePlayer = setPlayer();
-        document.getElementById("start").style.visibility = "hidden";
-        document.getElementById("boy").style.visibility = "hidden";
-        document.getElementById("cat-girl").style.visibility = "hidden";
-        inAnimation = true;
-        main();
-    }
     global.reset = function() {
         inAnimation = false;
-        
+        document.getElementById("myCanvas").style.visibility = "hidden";
         document.getElementById("start").style.visibility = "visible";
+        document.getElementById("boy").style.visibility = "visible";
+        document.getElementById("cat-girl").style.visibility = "visible";
+        document.getElementById("horn-girl").style.visibility = "visible";
+        document.getElementById("pink-girl").style.visibility = "visible";
+        document.getElementById("princess-girl").style.visibility = "visible";
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -203,7 +221,11 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/char-cat-girl.png'
+        'images/char-cat-girl.png',
+        'images/char-horn-girl.png',
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png',
+        'images/Heart.png'
     ]);
     Resources.bindReady(init);// bind the function init() to the event "Ready"
 

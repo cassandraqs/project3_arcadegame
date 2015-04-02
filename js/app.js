@@ -31,19 +31,19 @@ Enemy.prototype.update = function(dt) {
     if(overlap === true)  {
         //collision 
         console.log("Hit!");
-        if(player.life > 1) {
+        if(player.life > 1) {//player has 3 lives
             player.life -= 1;
-            player.x = player.initial_x;
+            player.x = player.initial_x;//return player to her initial location
             player.y = player.initial_y;
         } else {
-            console.log("GAME OVER!");
+            console.log("GAME OVER!");//when player is hit 3 times, game over and return to player selection page
             reset();
         }
         
         
         
     } 
-    if(this.x >= ctx.canvas.width) {
+    if(this.x >= ctx.canvas.width) {//if bugs run out of canvas, they are set back to initial locations
         this.x = this.initial_x;
     }
 
@@ -60,26 +60,32 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function(x,y,speed) {
-    this.sprite = setPlayer();
+    this.sprite = "images/char-boy.png";//the default value of player.sprite is char-boy.png
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.initial_x = x;
     this.initial_y = y;
-    this.life = 3;
+    this.life = 3;//player has three chances to be hit;
+}
+
+Player.prototype.ChangeSprite = function(new_sprite) {//player selection
+    this.sprite = new_sprite;
 }
 
 Player.prototype.update = function() {
-    
+    //determine if there is overlap between player and bug
     if(((this.x+xdir*this.speed + 80) >= ctx.canvas.width)||((this.y + ydir*this.speed + 163)>=ctx.canvas.height)||((this.x + xdir*this.speed) <= 0)) {
         xdir = 0;
         ydir = 0;
         console.log("off canvas!");
-    } else if((this.y )<= 75) {
+    } else if((this.y )<= 75) {//when player reaches water, player wins
         xdir = 0;
         ydir = 0;
         console.log("you win!");
-        this.x = this.initial_x;
+        
+        
+        this.x = this.initial_x;//set player to initial location
         this.y = this.initial_y;
     } else {
 
